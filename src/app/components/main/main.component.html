@@ -1,0 +1,131 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+    <div class="logo">
+      <div>
+          <img src="https://ng.ant.design/assets/img/logo.svg">
+          Task system
+      </div>
+
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed"  (nzClick)="selectItemName($event)">
+      <li nz-submenu>
+        <span title><i class="anticon anticon-credit-card"></i><span class="nav-text">任务管理</span></span>
+        <ul>
+          <li nz-menu-item>
+            <a routerLink='running'>
+                <i class="anticon anticon-clock-circle-o"></i>
+                运行中任务
+            </a>
+             
+            
+          </li>
+          <li nz-menu-item >
+            <a routerLink='completed'>
+                <i class="anticon anticon-check-circle-o"></i>
+                已完成任务
+            </a>
+              
+          </li>
+          <li nz-menu-item>
+            <a routerLink='torun' >
+                <i class="anticon anticon-play-circle-o"></i>
+                待运行任务
+            </a>
+              
+          </li>
+          <li nz-menu-item>
+            <a routerLink='suspend'>
+                <i class="anticon anticon-pause-circle-o"></i>
+                暂停中任务
+            </a> 
+              
+          </li>
+          <li nz-menu-item>
+            <a routerLink='delete'>
+                <i class="anticon anticon-close-circle-o"></i> 
+                已删除任务
+            </a>
+             
+          </li>
+          <li nz-menu-item>
+            <a routerLink='block'>
+                <i class="anticon anticon-exclamation-circle-o"></i>
+                阻塞任务
+            </a>
+             
+          </li>
+          <li nz-menu-item>
+            <a routerLink='error'>
+                <i class="anticon anticon-question-circle-o"></i>
+                错误任务
+            </a>
+              
+          </li>
+
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-user"></i><span class="nav-text">用户管理</span></span>
+        <ul>
+          <li nz-menu-item>Team 1</li>
+          <li nz-menu-item>Team 2</li>
+        </ul>
+      </li>
+      <li nz-menu-item><span><i class="anticon anticon-setting"></i><span class="nav-text">系统设置</span></span></li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;">
+      <div  class="ant-row">
+        <div  class="ant-col-md-22 ant-col-sm-20">
+            <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+        </div>
+        <div  class="ant-col-md-1 ant-col-sm-2" >
+            <a (click)="createBasicNotification(template)">
+                <nz-badge [nzCount]="5" style="margin-right: 24px;">
+                    <nz-avatar nzIcon="anticon anticon-bell" [nzShape]="'square'"></nz-avatar>
+                  </nz-badge>
+              </a>
+        </div>
+        <div  class="ant-col-md-1 ant-col-sm-2">
+           <nz-dropdown>
+               <a nz-dropdown>
+                 管理 <i class="anticon anticon-down"></i>
+               </a>
+               <ul nz-menu nzSelectable>
+                 <li nz-menu-item>
+                   <a>我的信息</a>
+                 </li>
+                 <li nz-menu-item>
+                   <a>退出登陆</a>
+                 </li>
+               </ul>
+             </nz-dropdown>   
+       </div>
+      </div>
+      <ng-template #template>
+          <div class="ant-notification-notice-content">
+            <div class="ant-notification-notice-with-icon">
+              <span class="ant-notification-notice-icon"><i class="anticon anticon-smile-circle" style="color: rgb(16, 142, 233);"></i></span>
+              <div class="ant-notification-notice-message">Notification Title</div>
+              <div class="ant-notification-notice-description">
+                This is the content of the notification. This is the content of the notification. This is the content of the notification.
+              </div>
+            </div>
+          </div>
+        </ng-template>
+    </nz-header>
+    <nz-content style="margin:0 16px;">
+      <nz-breadcrumb style="margin:16px 0;">
+        <nz-breadcrumb-item>{{itemName}}</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div style="padding:24px; background: #fff; min-height: 785px;">
+       <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+  <i class="anticon anticon-up"></i>
+</ng-template>

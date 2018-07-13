@@ -1,0 +1,125 @@
+<div nz-row nzGutter="16">
+  <div nz-col  nzSpan="6" class="ng-star-inserted">
+    <nz-input-group nzSuffixIcon="anticon anticon-search">
+      <input type="text" nz-input placeholder="输入关键字识别搜索！">
+    </nz-input-group>
+  </div>
+  <div nz-col nzSpan="2" nzOffset="16">
+    <button nz-button nzType="default" (click)="showModal()" >新增任务</button>
+  </div>
+</div>
+
+
+
+<nz-table
+      #rowSelectionTable
+      [nzData]="data"
+      (nzCurrentPageDataChange)="currentPageDataChange($event)"
+      (nzPageIndexChange)="refreshStatus()"
+      (nzPageSizeChange)="refreshStatus()">
+      <thead>
+        <tr>
+          <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+          <th>编号</th>
+          <th>名称</th>
+          <th>组名称</th>
+          <th>触发名称</th>
+          <th>触发组名称</th>
+          <th>描述</th>
+          <th>执行周期</th>
+          <th>开始时间</th>
+          <th>创建时间</th>
+          <th>异常信息</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshStatus($event)"></td>
+          <td>{{data.name}}</td>
+          <td>{{data.age}}</td>
+          <td>{{data.address}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.age}}</td>
+          <td>{{data.address}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.age}}</td>
+          <td>{{data.address}}</td>
+          <td>{{data.name}}</td>
+          <td><button nz-button nzType="default">暂停</button>
+            <button nz-button nzType="default">删除</button>
+            <button nz-button nzType="default">更改</button></td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="新增任务"
+    nzOkText="提交"
+    nzCancelText="取消"
+    (nzOnOk)="handleOk()"
+    (nzOnCancel)="handleCancel()"
+  >
+
+    <p>
+        <nz-input-group nzAddOnBefore="任务名称：" >
+            <input type="text" nz-input>
+          </nz-input-group>
+    </p>
+
+<p>
+    <nz-input-group nzAddOnBefore="任务组名称：" >
+        <input type="text" nz-input>
+      </nz-input-group>
+</p>
+
+<p>
+    <nz-input-group nzAddOnBefore="触发器名称：" >
+        <input type="text" nz-input>
+      </nz-input-group>
+</p>
+
+<p>
+    <nz-input-group nzAddOnBefore="触发器组名称：" >
+        <input type="text" nz-input>
+      </nz-input-group>
+</p>
+
+<p>
+      <nz-input-group nzCompact>
+          <input type="text" nz-input [ngModel]="'执行周期表达式：'" [disabled]="true" style="width: 28%;background-color:#fafafa;color:rgba(0,0,0,.65);">
+          <input type="text" nz-input [ngModel]="'26888888'" style="width:50%;">
+          <input type="button" nz-input [ngModel]="'不会填点这里'" style="width:22%;color:#1890ff;" >  
+        </nz-input-group>
+</p>
+
+<p>
+    <nz-input-group nzAddOnBefore="任务程序集名称：" >
+        <input type="text" nz-input>
+      </nz-input-group>
+</p>
+<p>
+  <nz-input-group nzAddOnBefore="任务类完全名：" >
+      <input type="text" nz-input>
+    </nz-input-group>
+</p>
+<p>
+  <nz-input-group nzAddOnBefore="任务描述：" >
+      <input type="text" nz-input>
+    </nz-input-group>
+</p>
+<p>
+  <nz-input-group nzCompact>
+      <input type="text" nz-input [ngModel]="'开始时间：'" style="width:30%;">
+    <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" nzShowTime></nz-date-picker>
+  </nz-input-group>
+</p>
+<p>
+  <nz-upload
+    nzAction="https://jsonplaceholder.typicode.com/posts/">
+    <button nz-button>
+      <i class="anticon anticon-upload"></i><span>上传DLL</span>
+    </button>
+  </nz-upload>
+</p>
+    </nz-modal>
